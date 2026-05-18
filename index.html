@@ -4,677 +4,881 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Códigos de Línea — Telecomunicaciones I</title>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-  :root {
-    --bg: #0f1117;
-    --bg2: #181c27;
-    --bg3: #1e2334;
-    --border: rgba(255,255,255,0.08);
-    --border2: rgba(255,255,255,0.15);
-    --text: #e8eaf0;
-    --text2: #8b90a0;
-    --text3: #555c70;
-    --blue: #4a9eff;
-    --green: #3ecf8e;
-    --amber: #f59e0b;
-    --red: #f87171;
-    --purple: #a78bfa;
-    --coral: #fb7185;
-    --teal: #2dd4bf;
-    --accent: #4a9eff;
-  }
+:root{
+    --bg:#0f1117;
+    --bg2:#181c27;
+    --bg3:#1e2334;
+    --border:rgba(255,255,255,0.08);
+    --border2:rgba(255,255,255,0.15);
 
-  body {
-    font-family: 'Courier New', Courier, monospace;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 2rem 1rem;
-  }
+    --text:#e8eaf0;
+    --text2:#8b90a0;
+    --text3:#555c70;
 
-  .container { max-width: 900px; margin: 0 auto; }
+    --blue:#4a9eff;
+    --green:#3ecf8e;
+    --amber:#f59e0b;
+    --red:#f87171;
+    --coral:#fb7185;
+}
 
-  header {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-  }
+body{
+    font-family:'Courier New', monospace;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    padding:2rem 1rem;
+}
 
-  .header-tag {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    color: var(--blue);
-    text-transform: uppercase;
-    margin-bottom: 0.5rem;
-  }
+.container{
+    max-width:900px;
+    margin:auto;
+}
 
-  h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--text);
-    letter-spacing: -0.02em;
-  }
+header{
+    border-bottom:1px solid var(--border);
+    padding-bottom:1.5rem;
+    margin-bottom:2rem;
+}
 
-  h1 span { color: var(--blue); }
+.header-tag{
+    font-size:11px;
+    letter-spacing:0.12em;
+    color:var(--blue);
+    text-transform:uppercase;
+    margin-bottom:0.5rem;
+}
 
-  .subtitle {
-    font-size: 13px;
-    color: var(--text2);
-    margin-top: 4px;
-  }
+h1{
+    font-size:1.7rem;
+    color:var(--text);
+}
 
-  /* Input Section */
-  .input-section {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 1.5rem;
-  }
+h1 span{
+    color:var(--blue);
+}
 
-  .input-label {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--text3);
-    text-transform: uppercase;
-    margin-bottom: 0.6rem;
-  }
+.subtitle{
+    font-size:13px;
+    color:var(--text2);
+    margin-top:4px;
+}
 
-  .input-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
+.author{
+    margin-top:12px;
+    color:var(--blue);
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
 
-  .bit-input {
-    font-family: 'Courier New', monospace;
-    font-size: 15px;
-    padding: 9px 14px;
-    background: var(--bg3);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    color: var(--text);
-    flex: 1;
-    min-width: 220px;
-    outline: none;
-    letter-spacing: 0.08em;
-    transition: border-color 0.2s;
-  }
+.input-section{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1.25rem;
+    margin-bottom:1.5rem;
+}
 
-  .bit-input:focus { border-color: var(--blue); }
+.input-label{
+    font-size:11px;
+    color:var(--text3);
+    margin-bottom:0.6rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+}
 
-  .btn {
-    padding: 9px 18px;
-    border-radius: 8px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    color: var(--text);
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
+.input-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
 
-  .btn:hover { background: var(--bg3); border-color: var(--blue); color: var(--blue); }
+.bit-input{
+    flex:1;
+    min-width:220px;
 
-  .btn.primary {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #000;
-    font-weight: 700;
-  }
+    background:var(--bg3);
+    border:1px solid var(--border2);
+    border-radius:8px;
 
-  .btn.primary:hover { opacity: 0.85; }
+    color:var(--text);
 
-  .error-msg {
-    font-size: 12px;
-    color: var(--red);
-    margin-top: 8px;
-    display: none;
-  }
+    padding:10px 14px;
 
-  /* Tabs */
-  .tabs {
-    display: flex;
-    gap: 4px;
-    margin-bottom: 1.5rem;
-    background: var(--bg2);
-    padding: 4px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    flex-wrap: wrap;
-  }
+    font-family:'Courier New', monospace;
+    font-size:15px;
 
-  .tab {
-    padding: 8px 16px;
-    border-radius: 7px;
-    border: none;
-    background: transparent;
-    color: var(--text2);
-    font-family: 'Courier New', monospace;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    flex: 1;
-    min-width: 120px;
-  }
+    outline:none;
+}
 
-  .tab:hover { color: var(--text); background: var(--bg3); }
+.bit-input:focus{
+    border-color:var(--blue);
+}
 
-  .tab.active {
-    background: var(--bg3);
-    color: var(--blue);
-    border: 1px solid var(--border2);
-    font-weight: 700;
-  }
+.btn{
+    padding:10px 18px;
+    border-radius:8px;
+    border:1px solid var(--border2);
 
-  .panel { display: none; }
-  .panel.active { display: block; }
+    background:transparent;
+    color:var(--text);
 
-  /* Code selector */
-  .code-selectors {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
+    font-family:'Courier New', monospace;
 
-  .code-sel {
-    padding: 5px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    color: var(--text2);
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+    cursor:pointer;
+}
 
-  .code-sel:hover { border-color: var(--blue); color: var(--blue); }
+.btn:hover{
+    background:var(--bg3);
+    border-color:var(--blue);
+    color:var(--blue);
+}
 
-  /* Chart blocks */
-  .chart-block {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.25rem;
-    margin-bottom: 10px;
-  }
+.btn.primary{
+    background:var(--blue);
+    border-color:var(--blue);
+    color:#000;
+    font-weight:bold;
+}
 
-  .chart-title {
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 8px;
-    letter-spacing: 0.06em;
-  }
+.error-msg{
+    font-size:12px;
+    color:var(--red);
+    margin-top:8px;
+    display:none;
+}
 
-  .chart-title strong { color: var(--blue); }
+.tabs{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
 
-  .chart-canvas-wrap {
-    position: relative;
-    height: 100px;
-    width: 100%;
-  }
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
 
-  /* Metrics */
-  .metrics {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
-    margin-bottom: 1.25rem;
-  }
+    padding:4px;
+    margin-bottom:1.5rem;
+}
 
-  .metric {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 0.9rem 1rem;
-  }
+.tab{
+    flex:1;
+    min-width:120px;
 
-  .metric-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; letter-spacing: 0.06em; }
-  .metric-val { font-size: 22px; font-weight: 700; color: var(--text); }
+    padding:8px 16px;
 
-  /* Bit pills */
-  .bits-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
-    margin: 0.75rem 0;
-  }
+    border:none;
+    border-radius:7px;
 
-  .bp {
-    width: 30px; height: 30px;
-    display: flex; align-items: center; justify-content: center;
-    border-radius: 50%;
-    font-size: 13px; font-weight: 700;
-    border: 1px solid var(--border2);
-    background: var(--bg3);
-    color: var(--text);
-    font-family: 'Courier New', monospace;
-  }
+    background:transparent;
 
-  .bp.parity { background: rgba(74,158,255,0.15); color: var(--blue); border-color: rgba(74,158,255,0.4); }
-  .bp.error  { background: rgba(248,113,113,0.15); color: var(--red); border-color: rgba(248,113,113,0.5); }
-  .bp.fixed  { background: rgba(62,207,142,0.15); color: var(--green); border-color: rgba(62,207,142,0.4); }
+    color:var(--text2);
 
-  /* Info boxes */
-  .info-box {
-    background: var(--bg2);
-    border-left: 3px solid var(--blue);
-    border-radius: 0 8px 8px 0;
-    padding: 0.75rem 1rem;
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-  }
+    cursor:pointer;
+    font-family:'Courier New', monospace;
+}
 
-  .info-box.green { border-color: var(--green); }
-  .info-box.amber { border-color: var(--amber); }
-  .info-box.red   { border-color: var(--red); }
+.tab:hover{
+    background:var(--bg3);
+    color:var(--text);
+}
 
-  /* Error simulation */
-  .sim-section {
-    border-top: 1px solid var(--border);
-    padding-top: 1.25rem;
-    margin-top: 1.5rem;
-  }
+.tab.active{
+    background:var(--bg3);
+    color:var(--blue);
+    border:1px solid var(--border2);
+    font-weight:bold;
+}
 
-  .sim-title {
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: var(--text3);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-  }
+.panel{
+    display:none;
+}
 
-  .sim-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-  }
+.panel.active{
+    display:block;
+}
 
-  .sim-label { font-size: 13px; color: var(--text2); }
+.chart-block{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
 
-  .num-input {
-    width: 80px;
-    font-family: 'Courier New', monospace;
-    font-size: 14px;
-    padding: 7px 10px;
-    background: var(--bg3);
-    border: 1px solid var(--border2);
-    border-radius: 8px;
-    color: var(--text);
-    outline: none;
-  }
+    padding:1rem;
+    margin-bottom:12px;
+}
 
-  .num-input:focus { border-color: var(--blue); }
+.chart-title{
+    font-size:12px;
+    color:var(--text2);
+    margin-bottom:8px;
+}
 
-  /* Hamming table */
-  .ham-table-wrap { overflow-x: auto; margin: 0.75rem 0; }
+.chart-title strong{
+    color:var(--blue);
+}
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: 'Courier New', monospace;
-    font-size: 12px;
-    min-width: 400px;
-  }
+.chart-canvas-wrap{
+    position:relative;
+    height:100px;
+}
 
-  th, td {
-    padding: 7px 10px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-    color: var(--text2);
-  }
+.metrics{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:8px;
+    margin-bottom:1rem;
+}
 
-  th { color: var(--text3); font-weight: 500; letter-spacing: 0.05em; }
-  td { color: var(--text); }
+.metric{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:1rem;
+}
 
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-family: 'Courier New', monospace;
-  }
+.metric-label{
+    font-size:11px;
+    color:var(--text3);
+}
 
-  .badge-ok  { background: rgba(62,207,142,0.15); color: var(--green); }
-  .badge-err { background: rgba(248,113,113,0.15); color: var(--red); }
-  .badge-warn{ background: rgba(245,158,11,0.15);  color: var(--amber); }
+.metric-val{
+    font-size:22px;
+    font-weight:bold;
+}
 
-  .hint { font-size: 11px; color: var(--text3); margin-top: 6px; }
+.bits-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:4px;
+    margin-top:0.7rem;
+}
 
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+.bp{
+    width:30px;
+    height:30px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:var(--bg3);
+    border:1px solid var(--border2);
+
+    font-weight:bold;
+    font-size:13px;
+}
+
+.bp.parity{
+    background:rgba(74,158,255,0.15);
+    color:var(--blue);
+}
+
+.bp.error{
+    background:rgba(248,113,113,0.15);
+    color:var(--red);
+}
+
+.bp.fixed{
+    background:rgba(62,207,142,0.15);
+    color:var(--green);
+}
+
+.info-box{
+    background:var(--bg2);
+    border-left:3px solid var(--blue);
+
+    padding:1rem;
+    border-radius:0 8px 8px 0;
+
+    color:var(--text2);
+    line-height:1.6;
+
+    margin-bottom:1rem;
+}
+
+.sim-section{
+    border-top:1px solid var(--border);
+    margin-top:1.5rem;
+    padding-top:1rem;
+}
+
+.sim-title{
+    font-size:12px;
+    color:var(--text3);
+    text-transform:uppercase;
+    margin-bottom:0.8rem;
+}
+
+.sim-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-bottom:1rem;
+}
+
+.num-input{
+    width:80px;
+
+    padding:7px 10px;
+
+    background:var(--bg3);
+    border:1px solid var(--border2);
+    border-radius:8px;
+
+    color:var(--text);
+
+    outline:none;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 9px;
+    border-radius:20px;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.badge-ok{
+    background:rgba(62,207,142,0.15);
+    color:var(--green);
+}
+
+.badge-err{
+    background:rgba(248,113,113,0.15);
+    color:var(--red);
+}
+
+.hint{
+    font-size:11px;
+    color:var(--text3);
+    margin-top:6px;
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
 
-  <header>
-    <div class="header-tag">Sistemas de Telecomunicaciones I</div>
-    <h1>Códigos de <span>Línea</span></h1>
-    <div class="subtitle">Codificación · Detección de errores · Corrección Hamming</div>
-  </header>
+<header>
 
-  <div class="input-section">
-    <div class="input-label">Cadena de bits (mínimo 14 bits)</div>
-    <div class="input-row">
-      <input class="bit-input" id="mainInput" maxlength="32" placeholder="10110010110010..." value="10110010110010"/>
-      <button class="btn primary" onclick="validateAndRun()">Procesar</button>
-      <button class="btn" onclick="randomBits()">Aleatorio</button>
-    </div>
-    <div class="error-msg" id="inputError">Solo se permiten 0s y 1s, mínimo 14 bits.</div>
-  </div>
+<div class="header-tag">
+Sistemas de Telecomunicaciones I
+</div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('codigos')">a. Códigos de línea</button>
-    <button class="tab" onclick="switchTab('deteccion')">b. Detección de errores</button>
-    <button class="tab" onclick="switchTab('correccion')">c. Corrección de errores</button>
-  </div>
+<h1>
+Códigos de <span>Línea</span>
+</h1>
 
-  <!-- PANEL A -->
-  <div class="panel active" id="panel-codigos">
-    <div id="signalCharts"></div>
-  </div>
+<div class="subtitle">
+Codificación · Detección de errores · Corrección Hamming
+</div>
 
-  <!-- PANEL B -->
-  <div class="panel" id="panel-deteccion">
-    <div class="info-box">
-      <strong>Paridad par:</strong> se agrega un bit extra al final de la trama para que el total de 1s sea par. Si el receptor detecta un número impar de 1s, hay un error de transmisión.
-    </div>
-    <div id="parityResult"></div>
-    <div class="sim-section">
-      <div class="sim-title">Simular error de transmisión</div>
-      <div class="sim-row">
-        <span class="sim-label">Posición del bit erróneo (0 = primer bit):</span>
-        <input class="num-input" id="errPos" type="number" min="0" value="3"/>
-        <button class="btn" onclick="simulateParityError()">Introducir error</button>
-      </div>
-      <div id="parityErrorResult"></div>
-    </div>
-  </div>
+<div class="author">
+RONALD ALEJANDRO QUISPE PUMA
+</div>
 
-  <!-- PANEL C -->
-  <div class="panel" id="panel-correccion">
-    <div class="info-box">
-      <strong>Código Hamming:</strong> inserta bits de paridad en posiciones potencia de 2 (1, 2, 4, 8…). El síndrome calculado en el receptor apunta exactamente al bit erróneo, permitiendo corrección automática de 1 bit.
-    </div>
-    <div id="hammingResult"></div>
-    <div class="sim-section">
-      <div class="sim-title">Simular y corregir error</div>
-      <div class="sim-row">
-        <span class="sim-label">Posición del error en la palabra Hamming (1-indexado):</span>
-        <input class="num-input" id="hammErrPos" type="number" min="1" value="3"/>
-        <button class="btn" onclick="simulateHammingError()">Corregir</button>
-      </div>
-      <div id="hammingErrorResult"></div>
-    </div>
-  </div>
+</header>
+
+<div class="input-section">
+
+<div class="input-label">
+Cadena de bits (mínimo 14 bits)
+</div>
+
+<div class="input-row">
+
+<input
+class="bit-input"
+id="mainInput"
+maxlength="32"
+placeholder="10110010110010..."
+value="10110010110010"
+/>
+
+<button class="btn primary" onclick="validateAndRun()">
+Procesar
+</button>
+
+<button class="btn" onclick="randomBits()">
+Aleatorio
+</button>
+
+</div>
+
+<div class="error-msg" id="inputError">
+Solo se permiten 0s y 1s, mínimo 14 bits.
+</div>
+
+</div>
+
+<div class="tabs">
+
+<button class="tab active" onclick="switchTab('codigos')">
+a. Códigos de línea
+</button>
+
+<button class="tab" onclick="switchTab('deteccion')">
+b. Detección de errores
+</button>
+
+<button class="tab" onclick="switchTab('correccion')">
+c. Corrección de errores
+</button>
+
+</div>
+
+<!-- PANEL A -->
+<div class="panel active" id="panel-codigos">
+<div id="signalCharts"></div>
+</div>
+
+<!-- PANEL B -->
+<div class="panel" id="panel-deteccion">
+
+<div class="info-box">
+<strong>Paridad par:</strong>
+se agrega un bit extra al final de la trama para que el total de 1s sea par.
+</div>
+
+<div id="parityResult"></div>
+
+</div>
+
+<!-- PANEL C -->
+<div class="panel" id="panel-correccion">
+
+<div class="info-box">
+<strong>Código Hamming:</strong>
+corrige automáticamente errores de 1 bit.
+</div>
+
+<div id="hammingResult"></div>
+
+</div>
 
 </div>
 
 <script>
+
 let currentBits = '10110010110010';
 const charts = {};
 
-function switchTab(name) {
-  document.querySelectorAll('.tab').forEach((t,i) =>
-    t.classList.toggle('active', ['codigos','deteccion','correccion'][i] === name));
-  document.querySelectorAll('.panel').forEach(p =>
-    p.classList.toggle('active', p.id === 'panel-'+name));
+function switchTab(name){
+
+document.querySelectorAll('.tab').forEach((t,i)=>
+t.classList.toggle('active',
+['codigos','deteccion','correccion'][i]===name)
+);
+
+document.querySelectorAll('.panel').forEach(p=>
+p.classList.toggle('active',
+p.id==='panel-'+name)
+);
+
 }
 
-function validateAndRun() {
-  const v = document.getElementById('mainInput').value.trim();
-  const err = document.getElementById('inputError');
-  if (!/^[01]+$/.test(v) || v.length < 14) { err.style.display='block'; return; }
-  err.style.display = 'none';
-  currentBits = v;
-  renderAll();
+function validateAndRun(){
+
+const v = document.getElementById('mainInput').value.trim();
+const err = document.getElementById('inputError');
+
+if(!/^[01]+$/.test(v) || v.length < 14){
+    err.style.display='block';
+    return;
 }
 
-function randomBits() {
-  const len = 14 + Math.floor(Math.random()*6);
-  let b = '';
-  for (let i=0;i<len;i++) b += Math.random()>0.5?'1':'0';
-  document.getElementById('mainInput').value = b;
-  currentBits = b;
-  document.getElementById('inputError').style.display='none';
-  renderAll();
+err.style.display='none';
+
+currentBits=v;
+
+renderAll();
+
 }
 
-function renderAll() {
-  renderLineCodes(currentBits);
-  renderParity(currentBits);
-  renderHamming(currentBits);
-  document.getElementById('parityErrorResult').innerHTML = '';
-  document.getElementById('hammingErrorResult').innerHTML = '';
+function randomBits(){
+
+const len = 14 + Math.floor(Math.random()*6);
+
+let b='';
+
+for(let i=0;i<len;i++){
+    b += Math.random()>0.5 ? '1':'0';
 }
 
-/* ======= CODIGOS DE LINEA ======= */
+document.getElementById('mainInput').value=b;
+
+currentBits=b;
+
+renderAll();
+
+}
+
+/* =========================
+   CODIGOS DE LINEA
+========================= */
+
 const codeInfo = [
-  { code:'NRZ-L',    color:'#4a9eff', desc:'NRZ-L — No retorno a cero nivel: +V = 1, 0V = 0' },
-  { code:'NRZ-I',    color:'#3ecf8e', desc:'NRZ-I — No retorno a cero inversión: transición en cada 1' },
-  { code:'RZ',       color:'#f59e0b', desc:'RZ — Retorno a cero: la señal vuelve a 0 a mitad de cada bit' },
-  { code:'Manchester',color:'#fb7185',desc:'Manchester — Transición al centro: 1=bajo→alto, 0=alto→bajo' },
-  { code:'AMI',      color:'#a78bfa', desc:'AMI — Marca de inversión alternada: 0=cero, 1=±V alternando' },
+
+{
+    code:'NRZ-L',
+    color:'#4a9eff',
+    desc:'NRZ-L — No retorno a cero nivel'
+},
+
+{
+    code:'NRZ-I',
+    color:'#3ecf8e',
+    desc:'NRZ-I — transición en cada 1'
+},
+
+{
+    code:'RZ',
+    color:'#f59e0b',
+    desc:'RZ — retorno a cero'
+},
+
+{
+    code:'Manchester',
+    color:'#fb7185',
+    desc:'Manchester — transición central'
+}
+
 ];
 
-function buildSignal(bits, code) {
-  let sig = []; let lastNRZI = 0; let lastAMI = 1;
-  for (let b of bits) {
-    const bit = parseInt(b);
-    if (code==='NRZ-L') { sig.push(bit,bit); }
-    else if (code==='NRZ-I') { if(bit===1) lastNRZI^=1; sig.push(lastNRZI,lastNRZI); }
-    else if (code==='RZ') { sig.push(bit,0); }
-    else if (code==='Manchester') { sig.push(bit===1?0:1, bit===1?1:0); }
-    else if (code==='AMI') {
-      if(bit===0){ sig.push(0.5,0.5); }
-      else { const v=lastAMI===1?1:0; lastAMI*=-1; sig.push(v,v); }
+function buildSignal(bits, code){
+
+let sig=[];
+let lastNRZI=0;
+
+for(let b of bits){
+
+    const bit=parseInt(b);
+
+    if(code==='NRZ-L'){
+        sig.push(bit,bit);
     }
-  }
-  return sig;
-}
 
-function renderLineCodes(bits) {
-  const container = document.getElementById('signalCharts');
-  container.innerHTML = '';
-  codeInfo.forEach(({code,color,desc}) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'chart-block';
-    wrap.innerHTML = `<div class="chart-title"><strong>${code}</strong> — <span style="color:var(--text3);font-size:11px">${desc.split('—')[1]?.trim()||''}</span></div>`;
-    const cw = document.createElement('div');
-    cw.className = 'chart-canvas-wrap';
-    const canvas = document.createElement('canvas');
-    canvas.setAttribute('role','img');
-    canvas.setAttribute('aria-label',`Señal ${code}`);
-    cw.appendChild(canvas);
-    wrap.appendChild(cw);
-    container.appendChild(wrap);
+    else if(code==='NRZ-I'){
 
-    const sig = buildSignal(bits, code);
-    const labels = sig.map((_,i) => i%2===0 ? bits[Math.floor(i/2)] : '');
-
-    if (charts[code]) charts[code].destroy();
-    charts[code] = new Chart(canvas, {
-      type:'line',
-      data:{ labels, datasets:[{ data:sig, borderColor:color, backgroundColor:'transparent',
-        borderWidth:2.5, stepped:true, pointRadius:0, tension:0 }] },
-      options:{
-        responsive:true, maintainAspectRatio:false, animation:false,
-        plugins:{ legend:{display:false}, tooltip:{enabled:false} },
-        scales:{
-          x:{ ticks:{color:'#555c70',font:{size:11,family:'Courier New'},maxRotation:0},
-              grid:{color:'rgba(255,255,255,0.04)'} },
-          y:{ min:-0.15, max:1.15,
-              ticks:{color:'#555c70',font:{size:10},
-                callback:v=>v===1?'+V':v===0?'0V':v===0.5?'0':'−V'},
-              grid:{color:'rgba(255,255,255,0.04)'} }
+        if(bit===1){
+            lastNRZI ^= 1;
         }
-      }
-    });
-  });
+
+        sig.push(lastNRZI,lastNRZI);
+    }
+
+    else if(code==='RZ'){
+        sig.push(bit,0);
+    }
+
+    else if(code==='Manchester'){
+
+        sig.push(
+            bit===1 ? 0:1,
+            bit===1 ? 1:0
+        );
+
+    }
+
 }
 
-/* ======= PARIDAD ======= */
-function calcParity(bits) {
-  return bits.split('').reduce((a,b)=>a+parseInt(b),0)%2;
+return sig;
+
 }
 
-function renderParity(bits) {
-  const ones = bits.split('').filter(b=>b==='1').length;
-  const pb = calcParity(bits)===0?0:1;
-  const total = ones+pb;
-  document.getElementById('parityResult').innerHTML = `
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Bits de datos</div><div class="metric-val">${bits.length}</div></div>
-      <div class="metric"><div class="metric-label">Total de 1s</div><div class="metric-val">${ones}</div></div>
-      <div class="metric"><div class="metric-label">Bit de paridad</div><div class="metric-val" style="color:var(--blue)">${pb}</div></div>
-      <div class="metric"><div class="metric-label">Estado</div><div class="metric-val"><span class="badge badge-ok">Sin error</span></div></div>
-    </div>
-    <div class="chart-block">
-      <div class="chart-title"><strong>Trama transmitida</strong> — bit de paridad agregado al final (azul)</div>
-      <div class="bits-row">
-        ${bits.split('').map(b=>`<div class="bp">${b}</div>`).join('')}
-        <div class="bp parity" title="Bit de paridad">${pb}</div>
-      </div>
-      <div class="hint">Total de 1s en trama: ${total} → ${total%2===0?'par ✓':'impar ✗'}</div>
-    </div>`;
+function renderLineCodes(bits){
+
+const container=document.getElementById('signalCharts');
+
+container.innerHTML='';
+
+codeInfo.forEach(({code,color,desc})=>{
+
+const wrap=document.createElement('div');
+
+wrap.className='chart-block';
+
+wrap.innerHTML=
+`
+<div class="chart-title">
+<strong>${code}</strong> — ${desc}
+</div>
+`;
+
+const cw=document.createElement('div');
+
+cw.className='chart-canvas-wrap';
+
+const canvas=document.createElement('canvas');
+
+cw.appendChild(canvas);
+
+wrap.appendChild(cw);
+
+container.appendChild(wrap);
+
+const sig=buildSignal(bits,code);
+
+const labels=sig.map((_,i)=>
+i%2===0 ? bits[Math.floor(i/2)] : ''
+);
+
+if(charts[code]){
+    charts[code].destroy();
 }
 
-function simulateParityError() {
-  const bits = currentBits;
-  const pb = calcParity(bits)===0?0:1;
-  const frame = bits+pb;
-  let pos = parseInt(document.getElementById('errPos').value);
-  if(isNaN(pos)||pos<0||pos>=frame.length) pos=0;
-  const errFrame = frame.split('').map((b,i)=>i===pos?(b==='0'?'1':'0'):b).join('');
-  const errOnes = errFrame.split('').filter(b=>b==='1').length;
-  const detected = errOnes%2!==0;
-  document.getElementById('parityErrorResult').innerHTML = `
-    <div class="chart-block">
-      <div class="chart-title"><strong>Trama recibida</strong> — error introducido en posición ${pos} (rojo)</div>
-      <div class="bits-row">
-        ${errFrame.split('').map((b,i)=>`<div class="bp ${i===pos?'error':i===errFrame.length-1?'parity':''}">${b}</div>`).join('')}
-      </div>
-      <div class="hint">Total de 1s: ${errOnes} → ${errOnes%2===0?'par (sin error aparente)':'impar (error detectado)'}</div>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Error detectado</div><div class="metric-val"><span class="badge ${detected?'badge-err':'badge-warn'}">${detected?'Sí':'No detectado'}</span></div></div>
-      <div class="metric"><div class="metric-label">Paridad</div><div class="metric-val">${errOnes%2===0?'Par':'Impar'}</div></div>
-    </div>
-    <div class="info-box ${detected?'red':'amber'}">
-      ${detected
-        ? 'La paridad par <strong>detectó</strong> el error. Pero no puede indicar <em>qué bit</em> falló ni corregirlo — solo sabe que algo está mal.'
-        : 'La paridad simple <strong>no detecta errores dobles</strong>. Si se alteran 2 bits, los errores se cancelan y la paridad sigue siendo par.'}
-    </div>`;
+charts[code]=new Chart(canvas,{
+
+type:'line',
+
+data:{
+labels,
+datasets:[{
+    data:sig,
+    borderColor:color,
+    borderWidth:2.5,
+    stepped:true,
+    pointRadius:0
+}]
+},
+
+options:{
+
+responsive:true,
+maintainAspectRatio:false,
+
+plugins:{
+    legend:{display:false},
+    tooltip:{enabled:false}
+},
+
+scales:{
+
+x:{
+ticks:{
+    color:'#555c70'
+},
+grid:{
+    color:'rgba(255,255,255,0.04)'
+}
+},
+
+y:{
+min:-0.15,
+max:1.15,
+
+ticks:{
+color:'#555c70',
+
+callback:v=>v===1?'+V':'0V'
+},
+
+grid:{
+color:'rgba(255,255,255,0.04)'
 }
 
-/* ======= HAMMING ======= */
-function buildHamming(bits) {
-  const m = bits.length;
-  let r=0; while((1<<r)<m+r+1) r++;
-  const n=m+r;
-  const ham=new Array(n+1).fill(0);
-  let di=0;
-  for(let i=1;i<=n;i++) if((i&(i-1))!==0) ham[i]=parseInt(bits[di++]);
-  for(let i=0;i<r;i++){
-    const p=1<<i; let par=0;
-    for(let j=p;j<=n;j++) if(j&p) par^=ham[j];
-    ham[p]=par;
-  }
-  return {ham:ham.slice(1),n,r,ppos:Array.from({length:r},(_,i)=>1<<i)};
 }
 
-function checkHamming(arr){
-  const n=arr.length; let r=0; while((1<<r)<=n) r++;
-  let syn=0;
-  for(let i=0;i<r;i++){
-    const p=1<<i; let par=0;
-    for(let j=1;j<=n;j++) if(j&p) par^=arr[j-1];
-    if(par!==0) syn+=p;
-  }
-  return syn;
 }
 
-function renderHamming(bits) {
-  const {ham,n,r,ppos}=buildHamming(bits);
-  const ps=new Set(ppos);
-  document.getElementById('hammingResult').innerHTML=`
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Bits de datos (m)</div><div class="metric-val">${bits.length}</div></div>
-      <div class="metric"><div class="metric-label">Bits paridad (r)</div><div class="metric-val" style="color:var(--blue)">${r}</div></div>
-      <div class="metric"><div class="metric-label">Longitud total</div><div class="metric-val">${n}</div></div>
-      <div class="metric"><div class="metric-label">Estado</div><div class="metric-val"><span class="badge badge-ok">Válido</span></div></div>
-    </div>
-    <div class="chart-block">
-      <div class="chart-title"><strong>Palabra código Hamming</strong> — posiciones 1 a ${n} (azul = bits de paridad)</div>
-      <div class="bits-row">
-        ${ham.map((b,i)=>`<div class="bp ${ps.has(i+1)?'parity':''}" title="pos ${i+1}">${b}</div>`).join('')}
-      </div>
-      <div class="hint">Posiciones de paridad: ${ppos.join(', ')}</div>
-    </div>
-    <div class="chart-block">
-      <div class="chart-title"><strong>Tabla de posiciones</strong></div>
-      <div class="ham-table-wrap">
-        <table>
-          <tr><th>Posición</th>${ham.map((_,i)=>`<th>${i+1}</th>`).join('')}</tr>
-          <tr><th>Tipo</th>${ham.map((_,i)=>`<td style="color:${ps.has(i+1)?'var(--blue)':'var(--text2)'}">
-            ${ps.has(i+1)?'P':'D'}</td>`).join('')}</tr>
-          <tr><th>Bit</th>${ham.map(b=>`<td>${b}</td>`).join('')}</tr>
-        </table>
-      </div>
-    </div>`;
 }
 
-function simulateHammingError(){
-  const {ham,n,r,ppos}=buildHamming(currentBits);
-  let pos=parseInt(document.getElementById('hammErrPos').value);
-  if(isNaN(pos)||pos<1||pos>n) pos=1;
-  const errHam=[...ham]; errHam[pos-1]^=1;
-  const syn=checkHamming(errHam);
-  const corrected=[...errHam];
-  if(syn>0&&syn<=n) corrected[syn-1]^=1;
-  const ps=new Set(ppos);
-  document.getElementById('hammingErrorResult').innerHTML=`
-    <div class="chart-block">
-      <div class="chart-title"><strong>Palabra recibida</strong> — error en posición ${pos} (rojo)</div>
-      <div class="bits-row">
-        ${errHam.map((b,i)=>`<div class="bp ${i===pos-1?'error':ps.has(i+1)?'parity':''}">${b}</div>`).join('')}
-      </div>
-    </div>
-    <div class="metrics">
-      <div class="metric"><div class="metric-label">Síndrome</div><div class="metric-val">${syn}</div></div>
-      <div class="metric"><div class="metric-label">Síndrome binario</div><div class="metric-val" style="font-size:14px">${syn.toString(2).padStart(r,'0')}</div></div>
-      <div class="metric"><div class="metric-label">Bit erróneo en</div><div class="metric-val" style="color:var(--red)">pos ${syn}</div></div>
-      <div class="metric"><div class="metric-label">Resultado</div><div class="metric-val"><span class="badge badge-ok">Corregido</span></div></div>
-    </div>
-    <div class="chart-block">
-      <div class="chart-title"><strong>Palabra corregida</strong> — bit restaurado (verde)</div>
-      <div class="bits-row">
-        ${corrected.map((b,i)=>`<div class="bp ${i===syn-1?'fixed':ps.has(i+1)?'parity':''}">${b}</div>`).join('')}
-      </div>
-      <div class="hint">Bit corregido automáticamente en posición ${syn}</div>
-    </div>
-    <div class="info-box green">
-      El síndrome <strong>${syn}</strong> en binario <strong>${syn.toString(2).padStart(r,'0')}</strong> apunta directamente al bit erróneo en posición ${syn}. Hamming lo corrigió sin retransmisión.
-    </div>`;
+});
+
+});
+
+}
+
+/* =========================
+   PARIDAD
+========================= */
+
+function calcParity(bits){
+
+return bits
+.split('')
+.reduce((a,b)=>a+parseInt(b),0)%2;
+
+}
+
+function renderParity(bits){
+
+const ones=bits.split('').filter(b=>b==='1').length;
+
+const pb=calcParity(bits)===0?0:1;
+
+document.getElementById('parityResult').innerHTML=
+`
+<div class="metrics">
+
+<div class="metric">
+<div class="metric-label">Bits</div>
+<div class="metric-val">${bits.length}</div>
+</div>
+
+<div class="metric">
+<div class="metric-label">1s</div>
+<div class="metric-val">${ones}</div>
+</div>
+
+<div class="metric">
+<div class="metric-label">Paridad</div>
+<div class="metric-val">${pb}</div>
+</div>
+
+</div>
+
+<div class="chart-block">
+
+<div class="chart-title">
+<strong>Trama transmitida</strong>
+</div>
+
+<div class="bits-row">
+
+${bits.split('').map(b=>`<div class="bp">${b}</div>`).join('')}
+
+<div class="bp parity">
+${pb}
+</div>
+
+</div>
+
+</div>
+`;
+
+}
+
+/* =========================
+   HAMMING
+========================= */
+
+function buildHamming(bits){
+
+const m=bits.length;
+
+let r=0;
+
+while((1<<r)<m+r+1){
+    r++;
+}
+
+const n=m+r;
+
+const ham=new Array(n+1).fill(0);
+
+let di=0;
+
+for(let i=1;i<=n;i++){
+
+if((i&(i-1))!==0){
+
+    ham[i]=parseInt(bits[di++]);
+
+}
+
+}
+
+for(let i=0;i<r;i++){
+
+const p=1<<i;
+
+let par=0;
+
+for(let j=p;j<=n;j++){
+
+    if(j&p){
+        par ^= ham[j];
+    }
+
+}
+
+ham[p]=par;
+
+}
+
+return{
+ham:ham.slice(1),
+n,
+r
+};
+
+}
+
+function renderHamming(bits){
+
+const {ham,n,r}=buildHamming(bits);
+
+document.getElementById('hammingResult').innerHTML=
+`
+<div class="metrics">
+
+<div class="metric">
+<div class="metric-label">Datos</div>
+<div class="metric-val">${bits.length}</div>
+</div>
+
+<div class="metric">
+<div class="metric-label">Paridad</div>
+<div class="metric-val">${r}</div>
+</div>
+
+<div class="metric">
+<div class="metric-label">Total</div>
+<div class="metric-val">${n}</div>
+</div>
+
+</div>
+
+<div class="chart-block">
+
+<div class="chart-title">
+<strong>Palabra Hamming</strong>
+</div>
+
+<div class="bits-row">
+
+${ham.map((b,i)=>`
+<div class="bp">
+${b}
+</div>
+`).join('')}
+
+</div>
+
+</div>
+`;
+
+}
+
+function renderAll(){
+
+renderLineCodes(currentBits);
+
+renderParity(currentBits);
+
+renderHamming(currentBits);
+
 }
 
 renderAll();
+
 </script>
+
 </body>
 </html>
